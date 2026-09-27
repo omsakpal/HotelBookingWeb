@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wellesley · Verify Email</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+        body{min-height:100vh;display:flex;justify-content:center;align-items:center;background:#f7f6f2;color:#292621;padding:20px}
+        .verify-box{width:100%;max-width:380px;background:#fff;border:1px solid #e4e0d9;border-radius:10px;padding:32px}
+        .logo{text-align:center;font-size:22px;letter-spacing:3px;font-weight:600;margin-bottom:9px}
+        .subtitle{text-align:center;color:#777;font-size:14px;line-height:1.5;margin-bottom:22px}
+        .email{text-align:center;font-size:14px;font-weight:bold;color:#444;margin-bottom:24px;word-break:break-word}
+        label{display:block;margin-bottom:7px;font-size:13px;font-weight:bold;color:#444}
+        input{width:100%;padding:12px 13px;margin-bottom:17px;border:1px solid #ccc;border-radius:6px;font-size:18px;text-align:center;letter-spacing:5px;outline:none}
+        input:focus{border-color:#8b7457}
+        button{width:100%;padding:12px;border:0;border-radius:6px;background:#292621;color:#fff;font-size:14px;cursor:pointer}
+        button:hover{background:#49443d}
+        button:disabled{cursor:not-allowed}
+        .error{color:#a93636;text-align:center;margin-bottom:15px;font-size:13px;line-height:1.5}
+        .success{color:#397344;text-align:center;margin-bottom:15px;font-size:13px;line-height:1.5}
+        .info{text-align:center;margin-top:18px;color:#777;font-size:12px;line-height:1.5}
+        .resend{margin-top:15px}
+        .resend button{background:#fff;color:#333;border:1px solid #ccc}
+        .resend button:hover{background:#f5f4f1}
+        .back{text-align:center;margin-top:19px}
+        .back a{color:#333;font-weight:bold;text-decoration:none;font-size:13px}
+    </style>
+</head>
+<body>
+
+<div class="verify-box">
+    <div class="logo">THE WELLESLEY</div>
+
+    <div class="subtitle">
+        Verify your email to continue creating your account.
+    </div>
+
+    <div class="email" th:text="${session.registerEmail}"></div>
+
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+
+    <div class="success" th:if="${success}" th:text="${success}"></div>
+
+    <form action="/register-verify" method="post">
+        <label for="otp">Verification Code</label>
+        <input type="text"
+               id="otp"
+               name="otp"
+               placeholder="000000"
+               maxlength="6"
+               pattern="[0-9]{6}"
+               inputmode="numeric"
+               required>
+        <button type="submit">Verify Email</button>
+    </form>
+
+    <div class="info">
+        We sent a verification code to this email.
+    </div>
+
+    <div class="info">
+        The code is valid for 5 minutes.
+    </div>
+
+    <form action="/resend-register-otp" method="post" class="resend">
+        <button type="submit" id="resendButton">Resend OTP</button>
+    </form>
+
+    <div class="info" id="countdown"></div>
+
+    <div class="back">
+        <a href="/register">Use a different email</a>
+    </div>
+</div>
+
+<script>
+    let remaining = 60;
+    const button = document.getElementById("resendButton");
+    const countdown = document.getElementById("countdown");
+
+    function updateCountdown() {
+        if (remaining > 0) {
+            button.disabled = true;
+            button.style.opacity = "0.5";
+            countdown.textContent = "You can resend the OTP in " + remaining + " seconds.";
+            remaining--;
+            setTimeout(updateCountdown, 1000);
+        } else {
+            button.disabled = false;
+            button.style.opacity = "1";
+            countdown.textContent = "";
+        }
+    }
+
+    updateCountdown();
+</script>
+
+</body>
+</html>

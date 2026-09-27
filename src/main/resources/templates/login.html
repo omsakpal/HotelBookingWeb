@@ -1,0 +1,297 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wellesley - Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: #222;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background {
+      position: fixed;
+      inset: 0;
+      background-image: url('/images/wellesley-login.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 24, 22, 0.48);
+      z-index: -1;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 14px 20px;
+    }
+
+    .brand {
+      color: white;
+      text-align: center;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-small {
+      font-size: 11px;
+      letter-spacing: 5px;
+      margin-bottom: 6px;
+      opacity: 0.9;
+    }
+
+    .brand-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      letter-spacing: 4px;
+      font-weight: normal;
+    }
+
+    .brand-line {
+      width: 45px;
+      height: 1px;
+      background: #c7a76c;
+      margin: 9px auto 0;
+    }
+
+    .login-box {
+      width: 390px;
+      max-width: 100%;
+      padding: 28px 38px 23px;
+      background: rgba(255, 253, 248, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 4px;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+    }
+
+    .welcome {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .welcome h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 25px;
+      font-weight: normal;
+      color: #242820;
+      margin-bottom: 6px;
+    }
+
+    .welcome p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px 12px;
+      margin-bottom: 14px;
+      border: 1px solid #d3d0c8;
+      border-radius: 3px;
+      background: #fff;
+      color: #222;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #8d7951;
+    }
+
+    .forgot {
+      text-align: right;
+      margin-top: -4px;
+      margin-bottom: 16px;
+    }
+
+    .forgot a {
+      color: #66583d;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .forgot a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 3px;
+      background: #26352d;
+      color: white;
+      font-size: 14px;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1c2822;
+    }
+
+    .signup {
+      text-align: center;
+      margin-top: 17px;
+      padding-top: 15px;
+      border-top: 1px solid #e5e1d8;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .signup a {
+      color: #66583d;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .signup a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: #b3261e;
+      background: #fff1f0;
+      border: 1px solid #f0c7c4;
+      padding: 8px;
+      margin-bottom: 13px;
+      text-align: center;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+
+    .success {
+      color: #28633a;
+      background: #eef8f0;
+      border: 1px solid #c8e3ce;
+      padding: 8px;
+      margin-bottom: 13px;
+      text-align: center;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+
+    .footer {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      margin-top: 9px;
+      text-align: center;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        overflow-y: auto;
+      }
+
+      .page {
+        padding: 12px 15px;
+      }
+
+      .brand-name {
+        font-size: 32px;
+        letter-spacing: 3px;
+      }
+
+      .brand-small {
+        letter-spacing: 3px;
+      }
+
+      .login-box {
+        padding: 25px 25px 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="overlay"></div>
+
+<div class="page">
+
+  <div class="brand">
+    <div class="brand-small">ESTABLISHED • HOSPITALITY</div>
+    <div class="brand-name">THE WELLESLEY</div>
+    <div class="brand-line"></div>
+  </div>
+
+  <div class="login-box">
+
+    <div class="welcome">
+      <h1>Welcome Back</h1>
+      <p>Sign in to continue your stay.</p>
+    </div>
+
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+    <div class="success" th:if="${success}" th:text="${success}"></div>
+
+    <form action="/login" method="post">
+
+      <label for="email">Email</label>
+      <input type="email"
+             id="email"
+             name="email"
+             placeholder="Enter your email"
+             required>
+
+      <label for="password">Password</label>
+      <input type="password"
+             id="password"
+             name="password"
+             placeholder="Enter your password"
+             required>
+
+      <div class="forgot">
+        <a href="/forgot-password">Forgot Password?</a>
+      </div>
+
+      <button type="submit">SIGN IN</button>
+
+    </form>
+
+    <div class="signup">
+      Don't have an account?
+      <a href="/register">Create an account</a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Hotel Room Booking System • Java Project
+  </div>
+
+</div>
+
+</body>
+</html>
+```

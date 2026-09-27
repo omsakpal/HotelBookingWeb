@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wellesley · Create Account</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+        body{min-height:100vh;display:flex;justify-content:center;align-items:center;background:#f7f6f2;color:#292621;padding:20px}
+        .register-box{width:100%;max-width:400px;background:#fff;border:1px solid #e4e0d9;border-radius:10px;padding:32px}
+        .logo{text-align:center;font-size:22px;letter-spacing:3px;font-weight:600;margin-bottom:9px}
+        .subtitle{text-align:center;color:#777;font-size:14px;line-height:1.5;margin-bottom:22px}
+        .verified{text-align:center;color:#397344;font-size:13px;font-weight:bold;margin-bottom:22px}
+        label{display:block;margin-bottom:7px;font-size:13px;font-weight:bold;color:#444}
+        input{width:100%;padding:12px 13px;margin-bottom:17px;border:1px solid #ccc;border-radius:6px;font-size:14px;outline:none}
+        input:focus{border-color:#8b7457}
+        button{width:100%;padding:12px;border:0;border-radius:6px;background:#292621;color:#fff;font-size:14px;cursor:pointer;margin-top:2px}
+        button:hover{background:#49443d}
+        .error{color:#a93636;text-align:center;margin-bottom:15px;font-size:13px;line-height:1.5}
+    </style>
+</head>
+<body>
+
+<div class="register-box">
+    <div class="logo">THE WELLESLEY</div>
+
+    <div class="subtitle">
+        Your email has been verified. Complete your account details.
+    </div>
+
+    <div class="verified">
+        ✓ Email Verified
+    </div>
+
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+
+    <form action="/register-details" method="post">
+        <label for="name">Full Name</label>
+        <input type="text"
+               id="name"
+               name="name"
+               placeholder="Enter your full name"
+               required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel"
+               id="phone"
+               name="phone"
+               placeholder="Enter your 10-digit phone number"
+               pattern="[0-9]{10}"
+               maxlength="10"
+               inputmode="numeric"
+               required>
+
+        <label for="password">Password</label>
+        <input type="password"
+               id="password"
+               name="password"
+               placeholder="Create a password"
+               minlength="6"
+               required>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password"
+               id="confirmPassword"
+               name="confirmPassword"
+               placeholder="Confirm your password"
+               minlength="6"
+               required>
+
+        <button type="submit">Create Account</button>
+    </form>
+</div>
+
+</body>
+</html>

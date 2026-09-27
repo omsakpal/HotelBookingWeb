@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wellesley · Booking Confirmed</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+        body{background:#f7f6f2;color:#292621}
+        nav{height:72px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 6%;border-bottom:1px solid #e5e1da}
+        .logo{font-size:23px;letter-spacing:3px;font-weight:600}
+        .nav-links{display:flex;gap:30px}
+        .nav-links a{text-decoration:none;color:#555;font-size:14px}
+        .nav-links a:hover{color:#111}
+        .container{width:88%;max-width:760px;margin:50px auto}
+        .confirmation{background:#fff;border:1px solid #e3dfd7;border-radius:12px;padding:38px}
+        .success{text-align:center;margin-bottom:30px}
+        .check{width:58px;height:58px;border-radius:50%;background:#edf4ed;color:#47734b;display:flex;align-items:center;justify-content:center;font-size:29px;margin:0 auto 18px}
+        h1{font-family:Georgia,serif;font-size:32px;font-weight:500;margin-bottom:8px}
+        .success p{color:#777;font-size:14px}
+        .details{border-top:1px solid #e7e3dc;border-bottom:1px solid #e7e3dc;padding:20px 0}
+        .row{display:flex;justify-content:space-between;gap:20px;padding:9px 0;color:#777;font-size:14px}
+        .row strong{color:#292621;font-weight:600;text-align:right}
+        .total{display:flex;justify-content:space-between;align-items:center;padding-top:23px}
+        .total span{color:#777;font-size:14px}
+        .price{font-size:26px;font-weight:600}
+        .buttons{display:flex;gap:12px;margin-top:28px}
+        .btn{flex:1;text-align:center;text-decoration:none;padding:13px;border-radius:7px;font-size:14px}
+        .primary{background:#292621;color:#fff}
+        .secondary{border:1px solid #ccc;color:#333}
+        .primary:hover{background:#49443d}
+        .secondary:hover{background:#f5f4f1}
+        footer{text-align:center;color:#999;font-size:12px;margin-top:25px}
+        @media(max-width:600px){
+            nav{height:65px;padding:0 5%}
+            .logo{font-size:18px;letter-spacing:2px}
+            .nav-links{gap:12px}
+            .nav-links a{font-size:11px}
+            .container{width:90%;margin:30px auto}
+            .confirmation{padding:26px 20px}
+            h1{font-size:28px}
+            .row{display:block;padding:10px 0}
+            .row strong{display:block;text-align:left;margin-top:4px}
+            .buttons{display:block}
+            .btn{display:block;margin-top:10px}
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">THE WELLESLEY</div>
+    <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/rooms">Rooms</a>
+        <a href="/my-bookings">My Bookings</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="confirmation">
+
+        <div class="success">
+            <div class="check">✓</div>
+            <h1>Booking Confirmed</h1>
+            <p>Your reservation has been successfully confirmed.</p>
+        </div>
+
+        <div class="details">
+            <div class="row">
+                <span>Booking ID</span>
+                <strong>#[[${booking.bookingId}]]</strong>
+            </div>
+            <div class="row">
+                <span>Guest Name</span>
+                <strong>[[${customer.name}]]</strong>
+            </div>
+            <div class="row">
+                <span>Room</span>
+                <strong>[[${room.category}]] · Room [[${room.roomNumber}]]</strong>
+            </div>
+            <div class="row">
+                <span>Bed Type</span>
+                <strong>[[${room.bedType}]]</strong>
+            </div>
+            <div class="row">
+                <span>Guests</span>
+                <strong>[[${booking.guests}]]</strong>
+            </div>
+            <div class="row">
+                <span>Check-in</span>
+                <strong>[[${booking.checkIn}]]</strong>
+            </div>
+            <div class="row">
+                <span>Check-out</span>
+                <strong>[[${booking.checkOut}]]</strong>
+            </div>
+            <div class="row">
+                <span>Number of Nights</span>
+                <strong>[[${booking.numberOfDays}]]</strong>
+            </div>
+        </div>
+
+        <div class="total">
+            <span>Total Amount</span>
+            <div class="price">₹[[${#numbers.formatDecimal(booking.totalBill, 0, 'COMMA', 0, 'POINT')}]]</div>
+        </div>
+
+        <div class="buttons">
+            <a href="/rooms" class="btn primary">Browse More Rooms</a>
+            <a href="/home" class="btn secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <footer>The Wellesley · Hotel Room Booking System · Academic Project</footer>
+</div>
+
+</body>
+</html>

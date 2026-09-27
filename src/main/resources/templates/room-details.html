@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Details | The Wellesley</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f6f3ee;
+            color: #292722;
+        }
+
+        nav {
+            height: 78px;
+            background: #171714;
+            color: #f5f1e9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .logo {
+            font-size: 22px;
+            letter-spacing: 4px;
+            font-weight: normal;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ddd8ce;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1200px;
+            margin: 45px auto 70px;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            color: #625e56;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        .back:hover {
+            color: #292722;
+        }
+
+        .room-box {
+            background: white;
+            border: 1px solid #e3dfd7;
+            overflow: hidden;
+        }
+
+        .room-image {
+            height: 480px;
+            position: relative;
+            overflow: hidden;
+            background: #ddd;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(20, 20, 17, 0%), rgba(20, 20, 17, 35%));
+            pointer-events: none;
+        }
+
+        .room-label {
+            position: absolute;
+            left: 30px;
+            bottom: 25px;
+            background: rgba(255, 255, 255, 94%);
+            padding: 10px 15px;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #514d46;
+        }
+
+        .content {
+            padding: 38px 42px 42px;
+        }
+
+        .room-category {
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8a806e;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 40px;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .room-number {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #77736c;
+            margin-bottom: 28px;
+        }
+
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 28px;
+            border-top: 1px solid #e7e3dc;
+            border-bottom: 1px solid #e7e3dc;
+            padding: 17px 0;
+            margin-bottom: 28px;
+        }
+
+        .info span {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #5f5b54;
+        }
+
+        .description {
+            line-height: 1.8;
+            color: #625e56;
+            max-width: 850px;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        .amenities {
+            border-top: 1px solid #e7e3dc;
+            border-bottom: 1px solid #e7e3dc;
+            padding: 22px 0;
+            margin-bottom: 32px;
+        }
+
+        .amenities-title {
+            font-size: 19px;
+            font-weight: normal;
+            margin-bottom: 16px;
+        }
+
+        .amenity-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .amenity {
+            background: #f2efe9;
+            padding: 8px 12px;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            color: #625e56;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .booking {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .price small {
+            display: block;
+            font-family: Arial, sans-serif;
+            color: #77736c;
+            font-size: 10px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price strong {
+            font-size: 28px;
+            font-weight: normal;
+        }
+
+        .book-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+            height: 48px;
+            background: #292923;
+            color: white;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .book-btn:hover {
+            background: #403f38;
+        }
+
+        .unavailable-box {
+            background: #f2e7e4;
+            color: #8a4039;
+            padding: 14px 20px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            background: #171714;
+            color: #aaa69d;
+            text-align: center;
+            padding: 30px 20px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                height: auto;
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 30px auto 50px;
+            }
+
+            .room-image {
+                height: 300px;
+            }
+
+            .content {
+                padding: 28px 24px 30px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .booking {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .book-btn {
+                width: 100%;
+            }
+
+            .unavailable-box {
+                width: 100%;
+                text-align: center;
+            }
+
+            .room-label {
+                left: 18px;
+                bottom: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">THE WELLESLEY</div>
+    <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/rooms">Rooms</a>
+        <a href="/my-bookings">My Bookings</a>
+        <a href="/account">My Account</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <a href="/rooms" class="back">← Back to Rooms</a>
+
+    <div class="room-box">
+
+        <div class="room-image">
+            <img th:if="${room.roomNumber == 101}" src="/images/economy-room1.jpg" alt="Economy Family Room">
+            <img th:if="${room.roomNumber == 102}" src="/images/economy-room2.jpg" alt="Economy Family Room">
+            <img th:if="${room.roomNumber == 103}" src="/images/standard-room1.jpg" alt="Standard Family Room">
+            <img th:if="${room.roomNumber == 104}" src="/images/standard-room2.jpg" alt="Standard Family Room">
+            <img th:if="${room.roomNumber == 201}" src="/images/deluxe-room1.jpg" alt="Deluxe Double Room">
+            <img th:if="${room.roomNumber == 202}" src="/images/deluxe-room2.jpg" alt="Deluxe Family Room">
+            <img th:if="${room.roomNumber == 203}" src="/images/deluxe-room3.jpg" alt="Deluxe Family Room">
+            <img th:if="${room.roomNumber == 204}" src="/images/executive-room1.jpg" alt="Executive Family Room">
+            <img th:if="${room.roomNumber == 301}" src="/images/executive-room2.jpg" alt="Executive Family Room">
+            <img th:if="${room.roomNumber == 302}" src="/images/premium-suite.jpg" alt="Premium Suite">
+            <img th:if="${room.roomNumber == 401}" src="/images/luxurious-suite.jpg" alt="Luxury Suite">
+            <img th:if="${room.roomNumber == 402}" src="/images/luxurious-room.jpg" alt="Presidential Suite">
+
+            <div class="image-overlay"></div>
+
+            <div class="room-label">
+                The Wellesley · Room [[${room.roomNumber}]]
+            </div>
+        </div>
+
+        <div class="content">
+
+            <div class="room-category">The Wellesley Collection</div>
+
+            <h1>[[${room.category}]]</h1>
+
+            <div class="room-number">
+                Room [[${room.roomNumber}]]
+            </div>
+
+            <div class="info">
+                <span>🛏 [[${room.bedType}]]</span>
+                <span>👥 Up to [[${room.capacity}]] Guests</span>
+                <span>❄ Air Conditioning</span>
+                <span>⌁ Free Wi-Fi</span>
+            </div>
+
+            <div class="description">
+                Enjoy a comfortable and refined stay in our [[${room.category}]].
+                Thoughtfully arranged with elegant interiors, comfortable bedding and
+                modern conveniences, the room provides a relaxing setting for both
+                short stays and extended visits.
+            </div>
+
+            <div class="amenities">
+                <div class="amenities-title">Room Amenities</div>
+
+                <div class="amenity-list">
+                    <span class="amenity">Air Conditioning</span>
+                    <span class="amenity">Free Wi-Fi</span>
+                    <span class="amenity">Room Service</span>
+                    <span class="amenity">Television</span>
+                    <span class="amenity">Comfortable Bedding</span>
+                    <span class="amenity">Daily Housekeeping</span>
+
+                    <span th:if="${room.balcony}" class="amenity">Private Balcony</span>
+                    <span th:if="${room.pool}" class="amenity">Swimming Pool Access</span>
+                    <span th:if="${room.spa}" class="amenity">Spa Access</span>
+                </div>
+            </div>
+
+            <div class="booking">
+
+                <div class="price">
+                    <small>From</small>
+                    <strong>₹[[${#numbers.formatDecimal(room.price, 0, 'COMMA', 0, 'POINT')}]]</strong>
+                </div>
+
+                <a th:if="${room.available}"
+                   th:href="@{/book/{roomNumber}(roomNumber=${room.roomNumber})}"
+                   class="book-btn">
+                    Book This Room
+                </a>
+
+                <div th:unless="${room.available}" class="unavailable-box">
+                    Currently Unavailable
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer>
+    The Wellesley · Hotel Room Booking System · Academic Project
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Wellesley - Home</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f6f2;
+            color: #252a25;
+        }
+
+        nav {
+            height: 72px;
+            background: rgba(255, 253, 248, 0.98);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            border-bottom: 1px solid #e5e1d8;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 25px;
+            letter-spacing: 3px;
+            color: #26352d;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555a54;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #26352d;
+        }
+
+        .logout {
+            color: #765f3d !important;
+        }
+
+        .hero {
+            min-height: 500px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 80px 8%;
+            background-image: linear-gradient(
+                    rgba(22, 29, 25, 0.48),
+                    rgba(22, 29, 25, 0.48)
+            ), url('/images/wellesley-login.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            color: white;
+        }
+
+        .hero-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            margin-bottom: 18px;
+            color: #dfc998;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 52px;
+            font-weight: normal;
+            line-height: 1.12;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 570px;
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 27px;
+            background: #26352d;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #1c2822;
+        }
+
+        .intro {
+            padding: 65px 7% 25px;
+            text-align: center;
+        }
+
+        .intro-label {
+            color: #8d7951;
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .intro h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: normal;
+            color: #26352d;
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: #70736e;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .features {
+            padding: 35px 7% 70px;
+        }
+
+        .feature-container {
+            display: flex;
+            gap: 22px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            flex: 1;
+            min-width: 250px;
+            max-width: 330px;
+            padding: 30px 27px;
+            background: #fffdf8;
+            border: 1px solid #e5e1d8;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 42px;
+            height: 42px;
+            margin: 0 auto 18px;
+            border: 1px solid #c7a76c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8d7951;
+            font-size: 17px;
+        }
+
+        .feature-card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+            font-weight: normal;
+            color: #26352d;
+            margin-bottom: 11px;
+        }
+
+        .feature-card p {
+            color: #70736e;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        footer {
+            padding: 27px 20px;
+            background: #26352d;
+            color: rgba(255, 255, 255, 0.72);
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 0.4px;
+        }
+
+        .footer-name {
+            font-family: Georgia, "Times New Roman", serif;
+            color: white;
+            font-size: 17px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 800px) {
+            nav {
+                height: auto;
+                min-height: 72px;
+                padding: 15px 5%;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .hero {
+                min-height: 470px;
+                padding: 65px 7%;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                justify-content: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 450px;
+                padding: 55px 6%;
+                background-position: center;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .intro {
+                padding: 50px 6% 20px;
+            }
+
+            .intro h2 {
+                font-size: 29px;
+            }
+
+            .features {
+                padding: 30px 6% 55px;
+            }
+
+            .feature-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        THE WELLESLEY
+    </div>
+
+    <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/rooms">Rooms</a>
+        <a href="/my-bookings">My Bookings</a>
+        <a href="/account">My Account</a>
+        <a href="/logout" class="logout">Logout</a>
+    </div>
+
+</nav>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+            A DISTINGUISHED STAY
+        </div>
+
+        <h1>
+            Where every stay feels exceptional.
+        </h1>
+
+        <p>
+            Discover thoughtfully appointed rooms, refined comfort,
+            and an effortless booking experience at The Wellesley.
+        </p>
+
+        <a href="/rooms" class="btn">
+            EXPLORE ROOMS
+        </a>
+
+    </div>
+
+</section>
+
+<section class="intro">
+
+    <div class="intro-label">
+        THE WELLESLEY EXPERIENCE
+    </div>
+
+    <h2>
+        Comfort, elegance and simplicity.
+    </h2>
+
+    <p>
+        Everything you need for a seamless hotel experience,
+        from discovering your room to managing your stay.
+    </p>
+
+</section>
+
+<section class="features">
+
+    <div class="feature-container">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">⌂</div>
+
+            <h3>
+                Effortless Booking
+            </h3>
+
+            <p>
+                Browse our collection of rooms and reserve
+                the one that suits your stay.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">◇</div>
+
+            <h3>
+                Refined Rooms
+            </h3>
+
+            <p>
+                Explore room details, amenities, capacity
+                and pricing before making your choice.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">✓</div>
+
+            <h3>
+                Simple Management
+            </h3>
+
+            <p>
+                View your bookings, manage your account
+                and keep track of your stay with ease.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <div class="footer-name">
+        THE WELLESLEY
+    </div>
+
+    <p>
+        Hotel Room Booking System • Academic Project • © 2026
+    </p>
+
+</footer>
+
+</body>
+</html>

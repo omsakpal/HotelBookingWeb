@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms | The Wellesley</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f6f3ee;
+            color: #292722;
+        }
+
+        nav {
+            height: 78px;
+            background: #171714;
+            color: #f5f1e9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .logo {
+            font-size: 22px;
+            letter-spacing: 4px;
+            font-weight: normal;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ddd8ce;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .hero {
+            height: 360px;
+            background: linear-gradient(rgba(20, 20, 17, 45%), rgba(20, 20, 17, 62%)), url('/images/wellesley-home.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+
+        .hero-content p {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            color: #eee9df;
+            letter-spacing: 1px;
+        }
+
+        .search-section {
+            width: 88%;
+            max-width: 1100px;
+            margin: -38px auto 55px;
+            background: white;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 12%);
+        }
+
+        .search-title {
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 0.8fr auto auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .field label {
+            display: block;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+            color: #6b675f;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            height: 44px;
+            border: 1px solid #d5d0c7;
+            background: #faf9f6;
+            padding: 0 12px;
+            font-size: 14px;
+            color: #292722;
+        }
+
+        .btn {
+            height: 44px;
+            border: none;
+            padding: 0 23px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .search-btn {
+            background: #292923;
+            color: white;
+        }
+
+        .clear-btn {
+            background: #e9e5dd;
+            color: #33312d;
+        }
+
+        .rooms-section {
+            width: 88%;
+            max-width: 1200px;
+            margin: 0 auto 70px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-heading span {
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 11px;
+            color: #8a806e;
+        }
+
+        .section-heading h2 {
+            font-size: 34px;
+            font-weight: normal;
+            margin-top: 8px;
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .room-card {
+            background: white;
+            border: 1px solid #e3dfd7;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .room-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 9%);
+        }
+
+        .room-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            background: #ddd;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .room-card:hover .room-image img {
+            transform: scale(1.03);
+        }
+
+        .room-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 94%);
+            padding: 7px 11px;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .available {
+            color: #456247;
+        }
+
+        .unavailable {
+            color: #8a3f3f;
+        }
+
+        .room-content {
+            padding: 25px;
+        }
+
+        .room-category {
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8a806e;
+            font-size: 11px;
+            margin-bottom: 8px;
+        }
+
+        .room-title {
+            font-size: 26px;
+            font-weight: normal;
+            margin-bottom: 6px;
+        }
+
+        .room-number {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #77736c;
+            margin-bottom: 17px;
+        }
+
+        .room-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            border-top: 1px solid #e7e3dc;
+            border-bottom: 1px solid #e7e3dc;
+            padding: 15px 0;
+            margin-bottom: 17px;
+        }
+
+        .room-info span {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #5f5b54;
+        }
+
+        .amenities {
+            min-height: 25px;
+            margin-bottom: 20px;
+        }
+
+        .amenity {
+            display: inline-block;
+            background: #f2efe9;
+            padding: 6px 9px;
+            margin: 0 5px 5px 0;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            color: #625e56;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .room-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .price small {
+            display: block;
+            font-family: Arial, sans-serif;
+            color: #77736c;
+            font-size: 10px;
+            margin-bottom: 3px;
+        }
+
+        .price strong {
+            font-size: 23px;
+            font-weight: normal;
+        }
+
+        .view-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            height: 42px;
+            background: #292923;
+            color: white;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .view-btn:hover {
+            background: #403f38;
+        }
+
+        .unavailable-btn {
+            background: #ddd9d1;
+            color: #77736c;
+            cursor: not-allowed;
+        }
+
+        .unavailable-btn:hover {
+            background: #ddd9d1;
+        }
+
+        .no-rooms {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            background: white;
+            border: 1px solid #e3dfd7;
+            font-family: Arial, sans-serif;
+            color: #6d6961;
+        }
+
+        footer {
+            background: #171714;
+            color: #aaa69d;
+            text-align: center;
+            padding: 30px 20px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 850px) {
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                height: auto;
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                height: 300px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .search-section,
+            .rooms-section {
+                width: 92%;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+
+            .room-image {
+                height: 220px;
+            }
+
+            .room-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .view-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">THE WELLESLEY</div>
+    <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/rooms">Rooms</a>
+        <a href="/my-bookings">My Bookings</a>
+        <a href="/account">My Account</a>
+        <a href="/logout">Logout</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Rooms & Suites</h1>
+        <p>Thoughtfully designed spaces for an exceptional stay.</p>
+    </div>
+</section>
+
+<section class="search-section">
+    <div class="search-title">Find your stay</div>
+    <form class="search-form" id="searchForm">
+        <div class="field">
+            <label for="checkIn">Check-in</label>
+            <input type="date" id="checkIn">
+        </div>
+
+        <div class="field">
+            <label for="checkOut">Check-out</label>
+            <input type="date" id="checkOut">
+        </div>
+
+        <div class="field">
+            <label for="guests">Guests</label>
+            <select id="guests">
+                <option value="" selected>Select guests</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn search-btn">Search</button>
+        <button type="button" class="btn clear-btn" id="clearBtn">Clear</button>
+    </form>
+</section>
+
+<section class="rooms-section">
+    <div class="section-heading">
+        <span>Accommodation</span>
+        <h2>Choose your room</h2>
+    </div>
+
+    <div class="rooms-grid" id="roomsGrid">
+
+        <div class="room-card"
+             th:each="room : ${rooms}"
+             th:attr="data-capacity=${room.capacity},data-room=${room.roomNumber},data-category=${room.category}">
+
+            <div class="room-image">
+                <img th:if="${room.roomNumber == 101}" src="/images/economy-room1.jpg" alt="Economy Family Room">
+                <img th:if="${room.roomNumber == 102}" src="/images/economy-room2.jpg" alt="Economy Family Room">
+                <img th:if="${room.roomNumber == 103}" src="/images/standard-room1.jpg" alt="Standard Family Room">
+                <img th:if="${room.roomNumber == 104}" src="/images/standard-room2.jpg" alt="Standard Family Room">
+                <img th:if="${room.roomNumber == 201}" src="/images/deluxe-room1.jpg" alt="Deluxe Double Room">
+                <img th:if="${room.roomNumber == 202}" src="/images/deluxe-room2.jpg" alt="Deluxe Family Room">
+                <img th:if="${room.roomNumber == 203}" src="/images/deluxe-room3.jpg" alt="Deluxe Family Room">
+                <img th:if="${room.roomNumber == 204}" src="/images/executive-room1.jpg" alt="Executive Family Room">
+                <img th:if="${room.roomNumber == 301}" src="/images/executive-room2.jpg" alt="Executive Family Room">
+                <img th:if="${room.roomNumber == 302}" src="/images/premium-suite.jpg" alt="Premium Suite">
+                <img th:if="${room.roomNumber == 401}" src="/images/luxurious-suite.jpg" alt="Luxury Suite">
+                <img th:if="${room.roomNumber == 402}" src="/images/luxurious-room.jpg" alt="Presidential Suite">
+
+                <div class="room-status"
+                     th:classappend="${room.available} ? ' available' : ' unavailable'"
+                     th:text="${room.available} ? 'Available' : 'Unavailable'">
+                    Available
+                </div>
+            </div>
+
+            <div class="room-content">
+                <div class="room-category"
+                     th:text="${room.category == 'Economy Family' ? 'Economy Collection' : room.category == 'Standard Family' ? 'Standard Collection' : room.category == 'Deluxe Double' || room.category == 'Deluxe Family' ? 'Deluxe Collection' : room.category == 'Executive Family' ? 'Executive Collection' : room.category == 'Premium Suite' ? 'Suite Collection' : room.category == 'Luxury Suite' ? 'Luxury Collection' : 'Wellesley Signature'}">
+                    Collection
+                </div>
+
+                <h3 class="room-title" th:text="${room.category}">Room Category</h3>
+
+                <div class="room-number" th:text="'Room ' + ${room.roomNumber}">Room 101</div>
+
+                <div class="room-info">
+                    <span th:text="${room.bedType}">2 Double Beds</span>
+                    <span th:text="'Up to ' + ${room.capacity} + ' Guests'">Up to 4 Guests</span>
+                </div>
+
+                <div class="amenities">
+                    <span class="amenity" th:if="${room.spa}">Spa</span>
+                    <span class="amenity" th:if="${room.pool}">Pool</span>
+                    <span class="amenity" th:if="${room.balcony}">Balcony</span>
+                    <span class="amenity" th:if="${!room.spa && !room.pool && !room.balcony}">Comfort Room</span>
+                </div>
+
+                <div class="room-bottom">
+                    <div class="price">
+                        <small>From</small>
+                        <strong th:text="'₹' + ${#numbers.formatDecimal(room.price, 1, 0)}">₹1,800</strong>
+                    </div>
+
+                    <a th:if="${room.available}"
+                       th:href="@{/room/{roomNumber}(roomNumber=${room.roomNumber})}"
+                       class="view-btn">
+                        View Room
+                    </a>
+
+                    <span th:unless="${room.available}"
+                          class="view-btn unavailable-btn">
+                        Unavailable
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="no-rooms" id="noRooms">
+        No rooms match the selected guest requirement.
+    </div>
+</section>
+
+<footer>
+    The Wellesley · Hotel Room Booking System · <strong>JAVA PROJECT</strong>
+</footer>
+
+<script>
+    const searchForm = document.getElementById("searchForm");
+    const clearBtn = document.getElementById("clearBtn");
+    const checkIn = document.getElementById("checkIn");
+    const checkOut = document.getElementById("checkOut");
+    const guests = document.getElementById("guests");
+    const roomCards = document.querySelectorAll(".room-card");
+    const noRooms = document.getElementById("noRooms");
+
+    const today = new Date();
+    const todayString = today.toISOString().split("T")[0];
+
+    checkIn.min = todayString;
+    checkOut.min = todayString;
+
+    checkIn.addEventListener("change", function() {
+        checkOut.min = checkIn.value || todayString;
+
+        if (checkOut.value && checkOut.value <= checkIn.value) {
+            checkOut.value = "";
+        }
+    });
+
+    searchForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        if (!checkIn.value || !checkOut.value) {
+            alert("Please select both check-in and check-out dates.");
+            return;
+        }
+
+        if (!guests.value) {
+            alert("Please select the number of guests.");
+            return;
+        }
+
+        if (checkOut.value <= checkIn.value) {
+            alert("Check-out date must be after check-in date.");
+            return;
+        }
+
+        const guestCount = parseInt(guests.value);
+        let visibleRooms = 0;
+
+        roomCards.forEach(function(card) {
+            const capacity = parseInt(card.dataset.capacity);
+
+            if (capacity >= guestCount) {
+                card.style.display = "block";
+                visibleRooms++;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        noRooms.style.display = visibleRooms === 0 ? "block" : "none";
+
+        document.querySelector(".rooms-section").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
+
+    clearBtn.addEventListener("click", function() {
+        checkIn.value = "";
+        checkOut.value = "";
+        guests.value = "";
+
+        checkIn.min = todayString;
+        checkOut.min = todayString;
+
+        roomCards.forEach(function(card) {
+            card.style.display = "block";
+        });
+
+        noRooms.style.display = "none";
+    });
+</script>
+
+</body>
+</html>
